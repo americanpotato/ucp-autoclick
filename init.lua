@@ -22,6 +22,7 @@ return {
         local leftClickAddress = -1
         local shiftAddress = -1
         local hook_point = -1
+        local shopOpenAddress = -1
 
         if gameVersion == 189 then
             log(DEBUG, "Crusader HD Detected")
@@ -31,6 +32,8 @@ return {
             shiftAddress = crusaderStart + 11674864
             -- Stronghold Crusader.exe+68104
             hook_point = crusaderStart + 426244
+            -- Stronghold Crusader.exe+AD31CC 
+            shopOpenAddress = crusaderStart + 11350476
         elseif gameVersion == 100 then
             log(DEBUG, "Crusader Extreme Detected")
             -- Stronghold_Crusader_Extreme.exe+B2D02A
@@ -39,6 +42,8 @@ return {
             shiftAddress = crusaderStart + 11676016
             -- Stronghold_Crusader_Extreme.exe+68324 
             hook_point = crusaderStart + 426788
+            -- Stronghold_Crusader_Extreme.exe+267CFC2
+            shopOpenAddress = crusaderStart + 40357826
         else 
             log(DEBUG, "Game Version Unknown")
         end
@@ -46,6 +51,7 @@ return {
         log(DEBUG, "Left click address: " .. intToHex(leftClickAddress))
         log(DEBUG, "Shift address: " .. intToHex(shiftAddress))
         log(DEBUG, "Hook address: " .. intToHex(hook_point))
+        log(DEBUG, "Shop address: " .. intToHex(shopOpenAddress))
 
         local counterAddress = allocate(1)  -- allocate 1 byte for counter
         local lastShiftValue = allocate(1)  -- byte to store previous shift state (0 or 1)
@@ -56,7 +62,9 @@ return {
             -- -- Save registers we will use (eax, edx, ecx)
             0x50,               -- push eax
 
+            -- 
             -- start of mouse release logic
+            -- 
 
             -- Load shift state into AL
             0xA0, itob(shiftAddress),            -- mov al, [shiftAddress]
@@ -80,12 +88,19 @@ return {
             -- Save current shift into [lastShiftValue]
             0xA2, itob(lastShiftValue),         -- mov [lastShiftValue], al
 
+            -- 
             -- end of mouse release logic
+            -- 
 
-            -- Check shiftAddress (byte)
+            -- Check if shop is open (byte)
+            0xA0, itob(shopOpenAddress), -- mov al, [shopOpenAddress]
+            0x84, 0xC0,               -- test al, al
+            0x74, 0x2C,               -- je skip_hook
+
+            -- Check if shift is held (byte)
             0xA0, itob(shiftAddress), -- mov al, [shiftAddress]
             0x84, 0xC0,               -- test al, al
-            0x74, 0x23,               -- je skip_hook (offset to be adjusted below)
+            0x74, 0x23,               -- je skip_hook
 
             -- Load counter (byte)
             0xA0, itob(counterAddress), -- mov al, [counterAddress]
