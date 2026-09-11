@@ -1,7 +1,10 @@
 name: autoclicker
 display-name: AutoClicker
-version: 1.0.1
+version: 1.0.2
 author: americanpotato
 meta:
   version: 1.0.1
 type: module
+tags:
+- tools
+- interface
