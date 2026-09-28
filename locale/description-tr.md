@@ -1,3 +1,3 @@
 # Auto Clicker
 
-Pazar veya paral? asker karakolu gibi bir al??veri? penceresi a??kken tekrar tekrar t?klamak i?in Shift tu?unu bas?l? tutun. Otomatik t?klama di?er pencerelerde devre d???d?r.
+Pazar veya paralı asker karakolu gibi bir alışveriş penceresi açıkken tekrar tekrar tıklamak için Shift tuşunu basılı tutun. Otomatik tıklama diğer pencerelerde devre dışıdır.

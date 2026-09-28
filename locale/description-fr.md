@@ -1,3 +1,3 @@
 # Auto Clicker
 
-Maintenez Maj enfonc?e lorsqu?une boutique, comme le march? ou le poste de mercenaires, est ouverte pour r?p?ter les clics. Le clic automatique reste inactif ailleurs.
+Maintenez Maj enfoncée lorsqu’une boutique, comme le marché ou le poste de mercenaires, est ouverte pour répéter les clics. Le clic automatique reste inactif ailleurs.
