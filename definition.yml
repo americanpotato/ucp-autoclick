@@ -1,6 +1,8 @@
 name: autoclicker
 display-name: AutoClicker
-version: 1.0.1
+version: 1.0.2
+
+tags: [automation, interface, tools]
 author: americanpotato
 meta:
   version: 1.0.1
